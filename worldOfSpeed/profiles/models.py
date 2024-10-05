@@ -34,4 +34,17 @@ class Profile(models.Model):
         null=True, blank=True,
         max_length=MAX_LENGTH_LAST_NAME,
     )
-    profile_picture = models.URLField()
+    profile_picture = models.URLField(
+        null=True, blank=True,
+    )
+
+    @property
+    def full_name_setup(self):
+        full_name = ""
+        if self.first_name and self.last_name:
+            full_name = self.first_name + " " + self.last_name
+        elif self.first_name and not self.last_name:
+            full_name = self.first_name
+        elif not self.first_name and self.last_name:
+            full_name = self.last_name
+        return full_name

@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/style/style.css" />
-    <title>WorldOfSpeed</title>
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    <div id="box">
-      <header>
-        <!-- Navigation Bar -->
-        <h1>
-          <a class="index-navigation" href="#"
-          ><span>World of Speed</span></a
-        >
-        </h1>
-        <nav>
-          <a href="#">Catalogue</a>
-          <a href="#">Create Car</a>
-          <a href="#">Profile</a>
-        </nav>
-      </header>
+{% block main_content %}
 
       <!-- details section -->
       <section id="car-details">
@@ -31,29 +10,25 @@
             <!-- car image -->
             <img
               class="car-img"
-              src="https://cdn.pixabay.com/photo/2017/06/19/19/05/rally-2420637_1280.jpg"
+              src="{{ selected_car.image_url }}"
               alt="car image"
             />
             <!-- car type -->
-            <h1>Rally</h1>
+            <h1>{{ selected_car.type }}</h1>
             <!-- car model -->
-            <p><span class="description">Model: Ford Puma M</span></p>
+            <p><span class="description">Model: {{ selected_car.model }}</span></p>
             <!-- car year -->
-            <p><span class="description">Year: 2017</span></p>
+            <p><span class="description">Year: {{ selected_car.year }}</span></p>
             <!-- car price -->
-            <p><span class="description">Price: 85000.000</span></p>
+            <p><span class="description">Price: {{ selected_car.price|floatformat:3 }}</span></p>
           </div>
 
           <!-- Edit/Delete buttons -->
           <div class="buttons">
-            <a href="#" class="edit-button">Edit</a>
-            <a href="#" class="delete-button">Delete</a>
+            <a href="{% url 'car-edit' selected_car.pk %}" class="edit-button">Edit</a>
+            <a href="{% url 'car-delete' selected_car.pk %}" class="delete-button">Delete</a>
           </div>
         </div>
       </section>
 
-      <!-- footer -->
-      <footer>&copy;SoftUni Team 2024. All rights reserved.</footer>
-    </div>
-  </body>
-</html>
+{% endblock %}

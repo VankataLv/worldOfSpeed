@@ -8,5 +8,5 @@ def validate_chars_username(username):
 
 
 def validate_username_length(username):
-    if username.length() < 3:
+    if len(username) < 3:
         raise ValidationError("Username must be at least 3 chars long!")
